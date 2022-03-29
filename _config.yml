@@ -1,15 +1,15 @@
 # Setup
-title:               'Meggs' Musings'
+title:               'Today I Learned'
 tagline:             'Notes to self about software development'
 description:         ''
-url:                 "https://cmeggs0.github.io"
+url:                 'https://cmeggs0.github.io/'
 baseurl:             'til/'
 paginate:            5
 permalink:           pretty
 
 # About/contact
 author:
-  name:              Chris Meggs
+   name:              Chris Meggs
   email:             meggsc91@gmail.com
 
 # Gems
