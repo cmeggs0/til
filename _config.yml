@@ -2,7 +2,7 @@
 title:               'Meggs' Musings'
 tagline:             'Notes to self about software development'
 description:         ''
-url:                 'https://cmeggs0.github.io/'
+url:                 "https://cmeggs0.github.io"
 baseurl:             'til/'
 paginate:            5
 permalink:           pretty
