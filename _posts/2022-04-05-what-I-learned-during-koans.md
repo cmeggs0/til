@@ -3,24 +3,24 @@ layout: post
 title: "Some of the stuff that I learned during Ruby Koans"
 ---
 ### Arrays
-Buildarray = [1,2]
-Range.to_a
-.push(:last) – adds element to end of array
-.pop – removes last element of an array
-.shift – same as pop, but first element
-The unshift() method adds one or more elements to the beginning of an array and returns the new length of the array.
-Splat operators
+- Buildarray = [1,2]
+- Range.to_a
+- .push(:last) – adds element to end of array
+- .pop – removes last element of an array
+- .shift – same as pop, but first element
+- The unshift() method adds one or more elements to the beginning of an array and returns the new length of the array.
+- Splat operators
 ### Objects
-Everything is an object
-Inspect() returns a string
-Integers object id = n*2+1, works for negatives as well
-.clone creates a different object
+- Everything is an object
+- Inspect() returns a string
+- Integers object id = n*2+1, works for negatives as well
+- .clone creates a different object
 ### Hashes
-{} empty hash
-Can use objects attached to strings in hashes for easy recall, hash key
-Hash order doesn’t matter, as long as hash keys match
-.merge to add to hash
-Unsure about:
+- {} empty hash
+- Can use objects attached to strings in hashes for easy recall, hash key
+- Hash order doesn’t matter, as long as hash keys match
+- .merge to add to hash
+- Unsure about:
   def test_default_value_is_the_same_object
     hash = Hash.new([])
  
@@ -32,22 +32,22 @@ Unsure about:
     assert_equal ["uno", "dos"], hash[:three]
  
     assert_equal true, hash[:one].object_id == hash[:two].object_id
-I think if you create a default hash, doesn’t register keys
+- I think if you create a default hash, doesn’t register keys
  
 ### Methods
  
-Can create our own methods in ruby
-Can add default values
-def method_with_defaults(a, b=:default_value)
+- Can create our own methods in ruby
+- Can add default values
+- def method_with_defaults(a, b=:default_value)
     [a, b]
   end
-With explicit return, return “return” value
-Without explicit return, returns last value
-Keyword Arguments
-Always have a default value, making them optional to the caller
+- With explicit return, return “return” value
+- Without explicit return, returns last value
+- Keyword Arguments
+- Always have a default value, making them optional to the caller
 
 ### Constants
-Nested constants over inherited constants, except with explicit scoping
+- Nested constants over inherited constants, except with explicit scoping
  
 ### Regular Expressions
  
@@ -73,8 +73,8 @@ Can capitalize any of these to negate or add ^ in front
 \d$ - search for digit at the end of lines
 \b anchors to word boundary
 () groups content, can also be used to content match by number, or access captures
-.scan finds all instances
-.sub – find and replace
+- .scan finds all instances
+- .sub – find and replace
   def test_sub_is_like_find_and_replace
     assert_equal "one t-three", "one two-three".sub(/(t\w*)/) { $1[0, 1] }
   end
@@ -85,12 +85,12 @@ Can capitalize any of these to negate or add ^ in front
  
 ### Control Statements
  
-If else sstatements
+- If else sstatements
 (true ? true value : falsevalue)
-Unless, is like if not true
-While statements
-Can use break unless or break if
-Next if
+- Unless, is like if not true
+- While statements
+- Can use break unless or break if
+- Next if
  
 ### Exceptions
   def test_exceptions_inherit_from_Exception
@@ -104,6 +104,6 @@ Next if
  
 array.each { |item| sum += item } == array.each do |item|
       								sum += item
-.collect or .map transforms each element of an array
-.select or .fina_all selects certain elements of an array
-Files act as a collection of lines
+- .collect or .map transforms each element of an array
+- .select or .fina_all selects certain elements of an array
+- Files act as a collection of lines
