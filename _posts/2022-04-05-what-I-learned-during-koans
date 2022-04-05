@@ -1,4 +1,6 @@
-Some of the stuff that I learned during Ruby Koans
+--
+title: "Some of the stuff that I learned during Ruby Koans"
+--
 Arrays
 Buildarray = [1,2]
 Range.to_a
