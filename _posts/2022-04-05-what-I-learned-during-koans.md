@@ -21,6 +21,7 @@ title: "Some of the stuff that I learned during Ruby Koans"
 - Hash order doesn’t matter, as long as hash keys match
 - .merge to add to hash
 - Unsure about:
+
   def test_default_value_is_the_same_object
     hash = Hash.new([])
  
@@ -32,6 +33,7 @@ title: "Some of the stuff that I learned during Ruby Koans"
     assert_equal ["uno", "dos"], hash[:three]
  
     assert_equal true, hash[:one].object_id == hash[:two].object_id
+    
 - I think if you create a default hash, doesn’t register keys
  
 ### Methods
@@ -51,30 +53,36 @@ title: "Some of the stuff that I learned during Ruby Koans"
  
 ### Regular Expressions
  
-//.class = Regexp (Regular Expression)
-“string”[/search string/]
-? – optional
-+ - one or more
-* - zero or more
-animals.select { |a| a[/[cbr]at/] }
-provides multiple options cat, bat, rat.
-.select makes sure it iterates through whole array
-[/[0123456789]+/] = [/\d+/] = [/[0-9]+/]
-[/\s+/] – search for string beginning with whitespace
+- //.class = Regexp (Regular Expression)
+- "string”[/search string/]
+- ? – optional
+- + - one or more
+- * - zero or more
+- animals.select { |a| a[/[cbr]at/] }
+- provides multiple options cat, bat, rat.
+- .select makes sure it iterates through whole array
+- [/[0123456789]+/] = [/\d+/] = [/[0-9]+/]
+- [/\s+/] – search for string beginning with whitespace
+
+
   def test_a_character_class_can_be_negated
     assert_equal "the number is ", "the number is 42"[/[^0-9]+/]
   end
-[/\d+/] – search for digit character class
-[/\w+/] – search for a word character class
-Can capitalize any of these to negate or add ^ in front 
-\A to anchor to the front of a string
-\z (at the end) to anchor to the end of a string
-^\d – search for digit at the start of lines
-\d$ - search for digit at the end of lines
-\b anchors to word boundary
-() groups content, can also be used to content match by number, or access captures
+  
+  
+- [/\d+/] – search for digit character class
+- [/\w+/] – search for a word character class
+- Can capitalize any of these to negate or add ^ in front 
+- \A to anchor to the front of a string
+- \z (at the end) to anchor to the end of a string
+- ^\d – search for digit at the start of lines
+- \d$ - search for digit at the end of lines
+- \b anchors to word boundary
+- () groups content, can also be used to content match by number, or access captures
 - .scan finds all instances
 - .sub – find and replace
+
+
   def test_sub_is_like_find_and_replace
     assert_equal "one t-three", "one two-three".sub(/(t\w*)/) { $1[0, 1] }
   end
@@ -93,6 +101,7 @@ Can capitalize any of these to negate or add ^ in front
 - Next if
  
 ### Exceptions
+
   def test_exceptions_inherit_from_Exception
     assert_equal RuntimeError, MySpecialError.ancestors[1]
     assert_equal StandardError, MySpecialError.ancestors[2]
