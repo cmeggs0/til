@@ -119,8 +119,28 @@ String(message)
     - '10' + 20 = 1020 - here the string takes precedence 
     - Conditionals will try to implicitly convert to boolean
     
-- Strings are truthy
-- 0 is falsy
 - false, 0, '', null, undefined, NaN are the only 6 falsy values 
 
-  
+Some rules for conditionals:
+ 1. Avoid direct comparisons
+ 2. Use triple equals === (strict equals operator)
+   -  Double equals == (loose equals operator) will convert types
+ 3. Convert to real Boolean values where need
+
+Turnary operators
+```{js}
+const isAuthenticated = true;
+const cartItemCount = isAuthenticated ? 1 : 0;
+```
+- Most useful if not performing an action
+- Can chain multiple turnaries, but should avoid due to readability
+```{js}
+const greeting = age < 10 ? "Hey there" : age > 18 ? "Greetings" : age > 10 ? "What's up?" : "That's an interesting age!";
+console.log(greeting); 
+```
+
+Short Circuiting
+- || or logical operator
+- && and logical operator
+- Cutting down our conditionals by using these operators
+- Can use () parenthesis to change order of operations
