@@ -206,11 +206,127 @@ const capitalize = name => `${name.charAt(0).toUpperCase()}${name.slice(1)}`;
 ```
 - Can be passed to other functions, like so:
 ```{js}
-function greetUser(name, callback) {
-  return callback(capitalize(name));  
+const countdown = (startingNumber, step) => {
+  let countFromNum = startingNumber + step;
+  return () => countFromNum -= step;
 }
 
-const result = greetUser(username, name => `Hi there, ${name}!`);
+const countingDown = countdown(20, 2);
+```
+**Partially Applied Functions**
+- Reduces the total number of arguments for a function
+- Locks initial data in place through a closure
+```{js}
+function getData(baseUrl) {
+  return function(route) { 
+    return function(callback) {    
+      fetch(`${baseUrl}${route}`)
+        .then(response => response.json())
+        .then(data => callback(data));  
+    }     
+  }  
+}
 
-console.log(result);
+const getSocialMediaData = getData('https://jsonplaceholder.typicode.com');
+
+const getSocialMediaPosts = getSocialMediaData('/posts');
+const getSocialMediaComments = getSocialMediaData('/comments');
+
+getSocialMediaPosts(posts => {
+  posts.forEach(post => console.log(post.title));  
+});
+// converted to arrow functions
+const getData = baseUrl => route => callback =>  
+      fetch(`${baseUrl}${route}`)
+        .then(response => response.json())
+        .then(data => callback(data));
+```
+- Since functions are actions, name them using verbs
+- eg. function updateTodo() {} function checkCompleteTodo() {}
+- Use consistent naming conventions throughout
+
+### Objects
+- Stored in unchangeing key: 'value'
+- Allows us to manage and organize multiple pieces of data
+- All keys are strings
+- Object creation:
+```{js}
+const objectName = {
+  key: 'value',
+  key2: {
+    nestedKey: 'value'
+    },
+  sayHi() {
+    console.log('hi')
+  }
+};
+objectName.methodName();
+```
+**Primatives vs Object Types**
+- Primatives are the same as long as their values are the same
+- 42 = variable1 === variable2 = 42, true
+- This is not the case for objects, each has a totally unique value even if their contents is the same
+- Another way to say this is that objects are reference types
+- Manipulating objects
+```{js}
+object.newKey = "value"
+object['new key'] = "value"
+// Alternative notation, allows for spaces in keys or to use variables in key, can also do directly during object creation
+const newKey = 'new key';
+const value = 'value';
+const object = {[newKey]: value};
+// For deletion
+delete object['new key']
+delete object.newKey
+```
+- Object destructuring allows us to pluck off the attributes we want from an object
+```{js}
+const user = {
+  name: "Reed",
+  username: "Reedbarger",
+  email: "reed@gmail.com",
+  details: {
+    title: "Programmer"  
+  }  
+};
+
+const { username, details: { title } } = user; 
+// variable name matches the key name, username and title, nested notation allowed
+
+function displayUser() {
+  console.log(`username: ${username}, job: ${title}`);  
+}
+
+displayUser()
+```
+**Assigning bulk data**
+- Object.assign({}, originalObject, newObject);
+- Remember to use empty object, otherwise you will mutate the originalObject
+- This way we can pass the data from newObject, into a newerObject, with the attributes of the originalObject
+- Alternatively const newerObject = { ...originalObject, ...newObject, addedKey: 'value' }
+- This ... is known as the spread operator, generally more straightforward than Object.assign
+- Order matters in both cases
+
+### Maps
+- Like objects+
+- Main benefit that we don't need keys to be strings
+- Created by
+```{js}
+const map1 = new Map([
+  [1, 1],
+  [true, true],
+]);
+// Mutate map
+map1.set('key', 'value');
+[...map1.keys()] // [1, true, 'key']
+// Iterate over ordered maps
+map1.forEach((value,key) => {
+  console.log(key, value);
+});
+```
+- Maps order matters
+- WeakMap, use for situations where it is easily sent to garbage
+- .size can easily check size of maps
+
+
 ```
