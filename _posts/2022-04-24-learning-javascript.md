@@ -106,7 +106,7 @@ switch (colorMode) {
     - undefinied
     - null
     - symbol
-  2. Object
+   2. Object
 - Can use typeof to check data type
 - Data conversion:
   1. Explicit
@@ -144,3 +144,73 @@ Short Circuiting
 - && and logical operator
 - Cutting down our conditionals by using these operators
 - Can use () parenthesis to change order of operations
+
+### Functions
+- Process that takes an input and produces some kind of output:
+ - Performs an action
+ - Returns some data
+```{js}
+function echo(input) {
+  console.log(input)
+}
+echo(argument)
+```
+- Creating a function named echo
+- Echo console logs whatever the input is
+- Lastly, we are calling echo on argument
+- Variable created in functions are only scoped to within the function
+- Can use return keyword to push result out of function scope, can save the output in a variable when calling the function
+
+**Closure**
+- An inner function that is inside its outer function's scope and has access to its variables
+- Can keep the variable alive, and closure over the initialization of the variable, for example:
+```{js}
+function handleLikePost(step) {
+  let likeCount = 0;
+  return function addLike() {
+    likeCount += step;    
+    return likeCount;
+  }
+  addLike();
+  console.log('like count:', likeCount);
+}
+
+const doubleLike = handleLikePost(2);
+
+console.log(doubleLike());
+console.log(doubleLike());
+console.log(doubleLike());
+```
+- Rules for closures:
+  1. Closures are a property of JS functions
+  2. Call function in different scope than where function was originally defined
+- Can control num of decimal places by added it as a new argument
+- Can set a default value like so:
+```{js}
+function convertTemperature(celsius, decimalPlaces = 1) {
+  const fahrenheit = celsius * 1.8 + 32;
+  return Number(fahrenheit.toFixed(decimalPlaces));
+}
+```
+- Above we are providing the default value of 1 for decimalPlaces, should there be no argument
+
+**Arrow Functions**
+- Uses the fat arrow syntax =>
+- More consise way to create functions, helps with working objects or classes
+- They are all anonymous
+- Don't need parentheses if there is only one argument
+- Implicit return, don't need explicit return keyword
+```{js}
+const username = 'john';
+const capitalize = name => `${name.charAt(0).toUpperCase()}${name.slice(1)}`;
+```
+- Can be passed to other functions, like so:
+```{js}
+function greetUser(name, callback) {
+  return callback(capitalize(name));  
+}
+
+const result = greetUser(username, name => `Hi there, ${name}!`);
+
+console.log(result);
+```
