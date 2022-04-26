@@ -327,6 +327,30 @@ map1.forEach((value,key) => {
 - Maps order matters
 - WeakMap, use for situations where it is easily sent to garbage
 - .size can easily check size of maps
+- this keyword, don't have to use variable name, dynamic
+  - Determined how function is called
+  - Arrow functions can be used to set this to the surrounding scope
 
-
-```
+### Arrays
+- More flexibility than objects, when orders are important
+- Created w/ [], index notes position in array
+- array.push(obj1, obj2) - adds to end of array
+  - array.unshift() - adds to the front of an array 
+  - array.concat() - creates a new array and adds to end 
+- array.length - check size of array
+- array.pop() - removes last obj of array
+- array.indexOf(value) - to search an array for a certain value and provide an index reference
+  - array.findIndex(idea => idea === 'value')
+- array.includes(value) - returns true/false for whether value is in the array, but only works for primative values
+- array.some(() => ) - just one element needs to match the condition
+- array.every() - if every element matches to match the condition
+- array.map() - transforms entire array, but creates a new array, can use to transform existing values or add new ones
+- array.forEach() - transforms existing array
+- Methods can be chained
+- array.filter() - searches within an array and creates a new array with the results, but if none match, creates empty array
+- array.find() - searches array for just one result
+- array.reduce((accumulator, value) => callback function, value of accumulator) 
+  - transforms an array into any data type, remembers the value of the accumulator
+  - almost every array method is a specific instance of reduce
+- newArray = [...oldArray, 'other values'] - creates a new array with oldArray values, can add other values
+- array.slice(starting index, ending index)
