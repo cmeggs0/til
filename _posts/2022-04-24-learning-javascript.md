@@ -354,3 +354,130 @@ map1.forEach((value,key) => {
   - almost every array method is a specific instance of reduce
 - newArray = [...oldArray, 'other values'] - creates a new array with oldArray values, can add other values
 - array.slice(starting index, ending index)
+- const [first, second, third] = array
+  - const [first, ...rest] = array
+**Converting objects to arrays**
+- Object.keys(object) - returns all the keys
+- Object.values() - returns all the values
+  - const values = Object.keys(object).map(key => object[key]) 
+- Object.entries - returns an array of arrays, [key, value] in each nested array
+```{js}
+const users = {
+  '2345234': {
+    name: "John",
+    age: 29 
+  },
+  '8798129': {
+    name: "Jane",
+    age: 42
+  },
+  '1092384': {
+    name: "Fred",
+    age: 17 
+  }
+};
+
+const usersOver20 = Object.entries(users).reduce((acc, [id, user]) => {
+  if (user.age > 20) {
+    acc.push({ ...user, id });
+  }  
+  return acc;
+}, []);
+console.log(usersOver20); 
+// returns [{name: "John", age: 29, id: "2345234"}, {name: "Jane", age: 42, id: "8798129"}]
+```
+**Sets**
+- Set is a special data structure that forces uniqueness
+- set.size - gives set size
+- const newArray = [...new Set(oldArray)] - creates a newArray with unique values within oldArray
+
+### Classes
+**Constructor functions**
+- Allows us to construct functions on demand, and add any methods we like
+- Convention is to capitalize first letter of function
+```{js}
+function Student(id, name, subjects =[]) {
+  this.id = id;
+  this.name = name;
+  this.subjects = subjects;  
+}
+// add methods using prototype keyword
+Student.prototype.addSubject = function(subject) {
+  this.subjects = {...this.subjects, subject]
+}
+Student.prototype.removeSubject = function(subject) {
+    let index = this.subjects.findIndex(idea => idea === subject);
+    this.subjects = [...this.subjects.slice(0, index), ...this.subjects.slice(index + 1)]
+}
+// call it to create new object
+const student1 = new Student(1, 'Gerald')
+// call method on student1
+student1.addSubject('Math')
+```
+- Prototypical inheritance - each instantiated object (from constructor function) inherits from prototype
+- Every object has prototype
+- Don't change the Object constructor prototype
+**Classes**
+- classes are cleaner types of constructor functions
+- class keyword
+- class Class {add methods here}
+```{js}
+class Student {
+  constructor(id, name, subjects = []) {
+    this.id = id;
+    this.name = name;
+    this.subjects = subjects;      
+  }   
+    
+  addSubject() {}  
+}
+```
+- **Will** get an error if we forget new keyword
+- Everything is currently public
+- Can create new classes that copy features from other class through extend keyword, in conjunction with super();
+- class newClass extends oldClass {}
+- Add keyword get to turn method into a getter and then can use it syntactically like a property
+- Setter can be done similarly, need to be paired with a getter
+- Prefix with _ to create bridge property
+```{js}
+class Product {
+  constructor(name, price, discountable) {
+    this._name = name;
+    this._price = price;
+    this.discountable = discountable;
+  }
+
+  get price() {
+    return this._price;
+  }
+  
+  set price(price) {
+    if (typeof price !== "number") {
+      return this._price;
+    } else {
+      this._price = price; 
+    }
+  }
+  
+  get name() {
+      return this._name;
+  }
+  
+  set name(name) {
+      if (typeof name !== 'string') {
+          return this._name;
+      } else {
+          this._name = name;
+      }
+  }
+}
+
+const product1 = new Product("Coffee Maker", 99.95, false);
+product1.price = 30;
+product1.name = 'Whisk'
+console.log(product1.name);
+```
+- Set the this context with .bind method
+- Can add bind in the constructor
+- Class fields proposal could change future syntax to rely on the () =>
+### DOM
