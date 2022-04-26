@@ -10,11 +10,11 @@
 ## The Basics 
 ### Variables
 - var is the keyword to define a variable, eg.
-```{js}
+```js
  var username;
 ```
 - Creates variable username, default value is null
-```{js}
+```js
  var username = "John";
  console.log(username);
 ```
@@ -43,14 +43,14 @@
     - Works best with primatives: numbers, strings, etc.
 ### Template literals
 - + adds strings, but easy to forget spaces
-```{js}
+```js
 let username = "John Smith";
 let message = "Hi" + username;
 console.log(message);
 ```
 - Prints HiJohn Smith
 - Instead:
-```{js}
+```js
 let username = "John Smith";
 let message = `Hi ${username}`;
 console.log(message);
@@ -68,7 +68,7 @@ Other thoughts about variable names:
 - USE ALL_CAPS AND _ IF YOU NEVER WANT THE VARIABLE CHANGED
 ### Conditionals
 - if statements evaluate boolean values, note else and else if are outside of first set of brackets
-```{js}
+```js
 if (statementBeingEvaluated) {
   console.log('Will print this string if first statement is true');
 } else if (secondStatementBeingEvaluated) {
@@ -128,13 +128,13 @@ Some rules for conditionals:
  3. Convert to real Boolean values where need
 
 Turnary operators
-```{js}
+```js
 const isAuthenticated = true;
 const cartItemCount = isAuthenticated ? 1 : 0;
 ```
 - Most useful if not performing an action
 - Can chain multiple turnaries, but should avoid due to readability
-```{js}
+```js
 const greeting = age < 10 ? "Hey there" : age > 18 ? "Greetings" : age > 10 ? "What's up?" : "That's an interesting age!";
 console.log(greeting); 
 ```
@@ -149,7 +149,7 @@ Short Circuiting
 - Process that takes an input and produces some kind of output:
  - Performs an action
  - Returns some data
-```{js}
+```js
 function echo(input) {
   console.log(input)
 }
@@ -164,7 +164,7 @@ echo(argument)
 **Closure**
 - An inner function that is inside its outer function's scope and has access to its variables
 - Can keep the variable alive, and closure over the initialization of the variable, for example:
-```{js}
+```js
 function handleLikePost(step) {
   let likeCount = 0;
   return function addLike() {
@@ -186,7 +186,7 @@ console.log(doubleLike());
   2. Call function in different scope than where function was originally defined
 - Can control num of decimal places by added it as a new argument
 - Can set a default value like so:
-```{js}
+```js
 function convertTemperature(celsius, decimalPlaces = 1) {
   const fahrenheit = celsius * 1.8 + 32;
   return Number(fahrenheit.toFixed(decimalPlaces));
@@ -200,12 +200,12 @@ function convertTemperature(celsius, decimalPlaces = 1) {
 - They are all anonymous
 - Don't need parentheses if there is only one argument
 - Implicit return, don't need explicit return keyword
-```{js}
+```js
 const username = 'john';
 const capitalize = name => `${name.charAt(0).toUpperCase()}${name.slice(1)}`;
 ```
 - Can be passed to other functions, like so:
-```{js}
+```js
 const countdown = (startingNumber, step) => {
   let countFromNum = startingNumber + step;
   return () => countFromNum -= step;
@@ -216,7 +216,7 @@ const countingDown = countdown(20, 2);
 **Partially Applied Functions**
 - Reduces the total number of arguments for a function
 - Locks initial data in place through a closure
-```{js}
+```js
 function getData(baseUrl) {
   return function(route) { 
     return function(callback) {    
@@ -250,7 +250,7 @@ const getData = baseUrl => route => callback =>
 - Allows us to manage and organize multiple pieces of data
 - All keys are strings
 - Object creation:
-```{js}
+```js
 const objectName = {
   key: 'value',
   key2: {
@@ -268,7 +268,7 @@ objectName.methodName();
 - This is not the case for objects, each has a totally unique value even if their contents is the same
 - Another way to say this is that objects are reference types
 - Manipulating objects
-```{js}
+```js
 object.newKey = "value"
 object['new key'] = "value"
 // Alternative notation, allows for spaces in keys or to use variables in key, can also do directly during object creation
@@ -280,7 +280,7 @@ delete object['new key']
 delete object.newKey
 ```
 - Object destructuring allows us to pluck off the attributes we want from an object
-```{js}
+```js
 const user = {
   name: "Reed",
   username: "Reedbarger",
@@ -311,7 +311,7 @@ displayUser()
 - Like objects+
 - Main benefit that we don't need keys to be strings
 - Created by
-```{js}
+```js
 const map1 = new Map([
   [1, 1],
   [true, true],
@@ -361,7 +361,7 @@ map1.forEach((value,key) => {
 - Object.values() - returns all the values
   - const values = Object.keys(object).map(key => object[key]) 
 - Object.entries - returns an array of arrays, [key, value] in each nested array
-```{js}
+```js
 const users = {
   '2345234': {
     name: "John",
@@ -395,7 +395,7 @@ console.log(usersOver20);
 **Constructor functions**
 - Allows us to construct functions on demand, and add any methods we like
 - Convention is to capitalize first letter of function
-```{js}
+```js
 function Student(id, name, subjects =[]) {
   this.id = id;
   this.name = name;
@@ -421,7 +421,7 @@ student1.addSubject('Math')
 - classes are cleaner types of constructor functions
 - class keyword
 - class Class {add methods here}
-```{js}
+```js
 class Student {
   constructor(id, name, subjects = []) {
     this.id = id;
@@ -439,7 +439,7 @@ class Student {
 - Add keyword get to turn method into a getter and then can use it syntactically like a property
 - Setter can be done similarly, need to be paired with a getter
 - Prefix with _ to create bridge property
-```{js}
+```js
 class Product {
   constructor(name, price, discountable) {
     this._name = name;
@@ -481,3 +481,75 @@ console.log(product1.name);
 - Can add bind in the constructor
 - Class fields proposal could change future syntax to rely on the () =>
 ### DOM
+- Document Object Model - A way to connect JS to the HTML and CSS
+- Turn HTML nodes into JS objects
+- Can dynamically add static html
+- To get a particular element, use getElementById() NB: IDs should be unique:
+```js
+const el = document.getElementById('home')
+```
+- To get the first element of a certain type, use querySelector();
+```js
+const link = document.querySelector('a');
+```
+- To get all the elements of a certain type, use querySelectorAll(). This creates a node list.
+```js
+const links = document.querySelectorAll('a');
+```
+- `forEach()` and `matches()` can be used to select a particular element from the node list: 
+```js
+links.forEach(link => {
+  if (link.matches('a[href="/login"]')) {
+    const loginLink = link;
+  }
+})
+```
+- getElementsByTagName can be used instead of querySelectorAll() to get all the elements of a certain type. This produces an HTMLCollection which cannot be iterated over with forEach().
+```js
+const divs = document.getElementsByTagName('div')
+```
+- Use createElement() to create an element:
+```js
+const newPost = document.createElement('div');
+```
+use innerHTML to modify an element's HTML:
+```js
+newPost.innerHTML = "<strong>This is a new post</strong>"
+```
+use append() and prepend() to add elements to the end or start of an HTML document respectively:
+```js
+document.body.append(newPost);
+
+document.body.prepend(newPost);
+```
+To put an element anywhere else, first query for the element which is where you want to place the new element and then prepend() the new element to it:
+```js
+const post = document.querySelector('.post');
+
+post.prepend(newPost);
+```
+- .style is used to modify and element's style
+- Named in camelCase
+- Style declarations must be declared as a string
+- We listen for events in JS with addEventListener()
+```js
+const posts = document.querySelectorAll(".post");
+posts.forEach(post => {  
+  post.addEventListener('click', event => {
+  //   console.log(event.target);  
+    console.log('Do you want to edit this post?')
+  });
+}); 
+/// Won't update with our new posts, instead can do the following:
+document.body.addEventListener('click', event => {
+  if (!event.target.closest('.post')) return;
+  
+  console.log('Do you want to edit this post?')  
+})
+``` 
+- Events:
+  - mouseover
+  - mouseout
+  - keyup
+  - keydown
+  - keypress
