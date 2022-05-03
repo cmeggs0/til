@@ -25,6 +25,7 @@ The time has come to add dynamic elements to my current project
 2. Add format.js to relevant action in controller
 3. Create JS response template
 4. Find or add unique ids to the html element that you are going to grab onto
+    - Think about which template is being rendered, look through forml to see if there are partials, then use html inspect to find the particular element that you need to grab
     - .append and .prepend add children to the selected element
     - .before and .after add siblings
     - Use the console to see where the element will be added
