@@ -3,12 +3,17 @@
 ## Static Pages in React
 
 - Learning the basics
+### Setting up React
 - https://reactjs.org/docs/cdn-links.html
     - Script tags to load react in the head of our html docs
     - React and react dom libaries
 - https://reactjs.org/docs/add-react-to-a-website.html#quickly-try-jsx
     - Pull in babel as well through type="text/bable" in any html script tag
 - Now have access to ReactDOM variable
+**Alternatively**
+- Add react and react-dom dependencies in Scrimba
+- import React from "react"
+- import ReactDOM from "react-dom"
 ```js
 ReactDOM.render(<h1>Hello, everyone!</h1>, document.getElementById("root"))
 ```
@@ -50,3 +55,6 @@ const navBar = (
 
 ReactDOM.render(navBar, document.getElementById("root"))
 ```
+### Setting up React
+- 
+- 
