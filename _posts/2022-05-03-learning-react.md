@@ -77,7 +77,8 @@ import Component from "../components/Component"
 - Consider adding parameters to function
 - Props are similarly placeholders in components that allow the recycling of the component
 - {} to use JS within JSX elements
-```function App() {
+```js
+function App() {
     const firstName = "Joe"
     const lastName = "Schmoe"
     return (
