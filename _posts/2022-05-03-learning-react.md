@@ -55,6 +55,34 @@ const navBar = (
 
 ReactDOM.render(navBar, document.getElementById("root"))
 ```
-### Setting up React
-- 
-- 
+### Components
+- One of the main benefits of React is creating components which are effectively JS functions
+- PascalCase instead of camelCase
+- Allows us to break our code into pieces and reassemble to create a sum that is greater than it's parts
+- Can nest components within other components
+- Can call <Component /> like an html element
+- Many ways to organize components, establish convention and be consistent
+- One way is to do through files, but remember
+```js
+// on component file
+import React from "react"
+export default function Component () {
+    return (<h1>Component Content</h1>)
+    }
+// on app file (to use component)
+import Component from "../components/Component"
+```
+- use className to allow for easy style editing in css
+### Props
+- Consider adding parameters to function
+- Props are similarly placeholders in components that allow the recycling of the component
+- {} to use JS within JSX elements
+```function App() {
+    const firstName = "Joe"
+    const lastName = "Schmoe"
+    return (
+        <h1>Hello {firstName} {lastName}!</h1>
+    )
+}
+// returns Hello Joe Schmoe!
+```
