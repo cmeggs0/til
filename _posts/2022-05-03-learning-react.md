@@ -87,3 +87,77 @@ function App() {
 }
 // returns Hello Joe Schmoe!
 ```
+**Syntax**
+- Can create properties (props) within each component
+```js
+// when calling
+<Component 
+    property1="property1input" 
+    property2="property2input" 
+/>
+// When constructing component
+export default function Component(props) {
+    return (
+        <div>
+            <p>{props.property1}</p>
+            <p>{props.property2}</p>
+        </div>
+    )
+}
+```
+- Can call on it like a JS object
+- Can destructure object immediately instead of calling props by using {}
+```js
+export default function Component({property1, property2}) {
+    return (
+        <div>
+            <p>{property1}</p>
+            <p>{property2}</p>
+        </div>
+    )
+}
+```
+- Can pass in non-string prop by propertyNonString={4, true, etc.}
+```js
+<img src={`../images/${props.img}`} className="card--image" />
+```
+- Above code allows us to insert props element into JSX string
+**Mapping Array to JSX elements**
+```js
+export default function App() {
+    const jokeElements = jokesData.map(joke => {
+        return <Joke
+            key={joke.id}
+            setup={joke.setup} 
+            punchline={joke.punchline} />
+    })
+    return (
+        <div>
+            {jokeElements}
+        </div>
+    )
+}
+```
+- Will get a warning unless we set unique keys
+### Conditional Rendering
+```js
+{props.openSpots === 0 && <div className="card--badge">SOLD OUT</div>}
+```
+- Surround with {} and use straight JS
+- Or can set logic in function before return ()
+**Refactoring**
+- Can pass all props in one go
+```js
+export default function App() {
+    const cards = data.map(item => {
+        return (
+            <Card
+                key={item.id}
+                item={item}
+            />
+        )
+    })
+// When returning props
+<img src={`../images/${props.item.coverImg}`} className="card--image" />
+```
+- Note, need to still include key
