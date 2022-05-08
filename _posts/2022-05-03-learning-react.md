@@ -161,3 +161,17 @@ export default function App() {
 <img src={`../images/${props.item.coverImg}`} className="card--image" />
 ```
 - Note, need to still include key
+- Can use the spread syntax instead
+```js
+export default function App() {
+    const cards = data.map(item => {
+        return (
+            <Card
+                key={item.id}
+                {...item}
+            />
+        )
+    })
+```
+- Now spreading, we can revert to original syntax when returning props (eg. props.coverImg)
+
