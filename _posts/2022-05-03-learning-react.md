@@ -174,4 +174,128 @@ export default function App() {
     })
 ```
 - Now spreading, we can revert to original syntax when returning props (eg. props.coverImg)
-
+### Adding Event Listeners
+- Similar to the html method: <div onclick="myFunction()"></div>
+- In react: <button onClick={function()}>Click me</button>
+    - onMouseOver, etc.
+    - https://reactjs.org/docs/events.html#mouse-events - for full list
+    - Drop parenthesis after function if we define function in component but outside of element container
+ ```js
+  function onClickReturn() {
+        var randomMeme = memesData.data.memes[Math.floor(Math.random()*memesData.data.memes.length)];
+        console.log(randomMeme.url)
+    }
+ ```
+ - Returning a random element from an array with subarrays of data.memes
+ - But we are stuck, as our url randomMeme variable is trapped within the function, and even if we move it outside, cannot update page
+**How to update the page with element calling on new variable**
+- Have to access React state:
+```js
+function App() {
+    const [things, setThings] = React.useState(["Thing 1", "Thing 2"])
+    
+    function addItem() {
+        const newThingText = `Thing ${things.length + 1}`
+        setThings(prevState => [...prevState, newThingText])
+    }
+    
+    const thingsElements = things.map(thing => <p key={thing}>{thing}</p>)
+    
+    return (
+        <div>
+            <button onClick={addItem}>Add Item</button>
+            {thingsElements}
+        </div>
+    )
+} 
+```
+### State
+- Props are immutable, should never change within component, similar to parameters being passed into a function
+- State refers to values that are managed by the component, similar to variable declared inside a function, but with added benefits. Any time have changing values that should be saved/displayed, you'll likely be using states.
+- State will allow react to remember those values even when a component is rerendered
+- React.useState() or can destructure in import React, {useState} from "react", then can just run useState()
+- Whatever is in parentheses React.useState("whatever") becomes the first value in an array produced by useState
+- Can use destructuring to more easily obtain values
+```js
+export default function App() {
+    const [isImportant, func] = React.useState("Yes") // func is usually setIsImportant
+    console.log(isImportant)
+    return (
+        <div className="state">
+            <h1 className="state--title">Is state important to know?</h1>
+            <div className="state--value">
+                <h1>{isImportant}</h1>
+            </div>
+        </div>
+    )
+}
+```
+- The function allows us to change states
+```js
+export default function App() {
+    const [count, setCount] = React.useState(0)
+    
+    function add() {
+        setCount(count +1)
+    }
+// Works, but not best practice    
+    function add() {
+        setCount(prevCount => prevCount + 1)
+    }
+// Should pass a callback function to set count, instead of using state directly
+```
+- Make sure to set state outside of function!
+- Can use terbaries within {} in jsx
+```js
+<h1>{isGoingOut ? "Yes" : "No"}</h1>
+```
+- Cannot use .push or array modifiers to modify original array in State, instead used the spread operator
+```js
+setThingsArray(prevThingsArray => [...prevThingsArray, `item you want to add`])
+// Can use on objects as well
+export default function App() {
+    const [contact, setContact] = React.useState({
+        firstName: "John",
+        lastName: "Doe",
+        phone: "+1 (719) 555-1212",
+        email: "itsmyrealname@example.com",
+        isFavorite: false
+    })
+    
+    let starIcon = contact.isFavorite ? "star-filled.png" : "star-empty.png"
+    
+    function toggleFavorite() {
+        setContact(prevContact => {
+            return {
+                ...prevContact,
+                isFavorite: !prevContact.isFavorite
+            }
+        })
+    }
+    
+    return (
+        <main>
+            <article className="card">
+                <img src="./images/user.png" className="card--image" />
+                <div className="card--info">
+                    <img 
+                        src={`../images/${starIcon}`} 
+                        className="card--favorite"
+                        onClick={toggleFavorite}
+                    />
+                    <h2 className="card--name">
+                        {contact.firstName} {contact.lastName}
+                    </h2>
+                    <p className="card--contact">{contact.phone}</p>
+                    <p className="card--contact">{contact.email}</p>
+                </div>
+                
+            </article>
+        </main>
+    )
+}
+```
+- Cannot use onClick or other event listeners on custom components, instead use handleClick={pass in function in} and then in our component onClick={props.handleClick}
+**Passing data to components**
+- Only parents can access state from, but if we raise state into parent, we can pass to children through props
+- Keep state as close to component as possible
