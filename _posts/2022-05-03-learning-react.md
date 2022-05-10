@@ -238,7 +238,7 @@ export default function App() {
     function add() {
         setCount(count +1)
     }
-// Works, but not best practice    
+// The above works, but not best practice    
     function add() {
         setCount(prevCount => prevCount + 1)
     }
@@ -299,3 +299,96 @@ export default function App() {
 **Passing data to components**
 - Only parents can access state from, but if we raise state into parent, we can pass to children through props
 - Keep state as close to component as possible
+- Multiple ways to change state
+```js
+export default function Box(props) {
+    const [on, setOn] = React.useState(props.on)
+    
+    const styles = {
+        backgroundColor: on ? "#222222" : "transparent"
+    }
+    
+    function toggle() {
+        setOn(prevOn => !prevOn)
+    }
+    
+    return (
+        <div style={styles} className="box" onClick={toggle}></div>
+    )
+}
+```
+- This way sets state for each individual box, known as derived state -> leads to multiple sources of truth, because we had state at the app level
+- Better way to structure, is to hold state at the App level
+```
+export default function App() {
+    const [squares, setSquares] = React.useState(boxes)
+    
+    function toggle(id) {
+        setSquares(prevSquares => {
+            return prevSquares.map((square) => {
+                return square.id === id ? {...square, on: !square.on} : square
+            })
+        }) 
+    }
+// in our app component
+// then at the component level we call it 
+<div 
+    style={styles} 
+    className="box"
+    onClick={()=>props.toggle(props.id)}
+>
+```
+### Conditional Rendering
+- A way to determine if something should or should not be displayed, or what choice should be displayed
+- using && operator can be great: {messages > 0 && <p>You have {messages.length} unread messages</p>}
+    - This will only display the message if both are true, but it goes in order from left to right
+- Using ternaries is very useful when you want to change the value based on a condition
+- If choosing between more than 2 things, can use if statement or switch statement. Could also use nested conditionals, but it can be harder to follow
+### Forms
+- A lot of good libraries
+- Instead of waiting until the end of process, React gathers information as it is input
+- https://reactjs.org/docs/forms.html - React forms documentation
+- Generally make React the single source of truth, a "controller compoennt" rather than relying on html input form elements
+- event is the implicit parameter on functions handling onChange inputs
+- Give our inputs a name property
+```js
+export default function Form() {
+    const [formData, setFormData] = React.useState(
+        {firstName: "", lastName: ""}
+    )
+    
+    console.log(formData)
+    
+    function handleChange(event) {
+        setFormData(prevFormData => {
+            return {
+                ...prevFormData,
+                [event.target.name]: event.target.value
+            }
+        })
+    }
+    
+    return (
+        <form>
+            <input
+                type="text"
+                placeholder="First Name"
+                onChange={handleChange}
+                name="firstName"
+            />
+            <input
+                type="text"
+                placeholder="Last Name"
+                onChange={handleChange}
+                name="lastName"
+            />
+        </form>
+    )
+}
+```
+- We can handle multiple inputs by changing our state to an object
+- Make sure you surround [event.target.name] with square brackets to make it the key
+**Controlled Components**
+- Make the state in React the single source of truth:
+- add 'value={formData.firstName}' to the input form to make sure that it is reflecting the React state
+- textarea is not self closing in html, but they have made it so in react
