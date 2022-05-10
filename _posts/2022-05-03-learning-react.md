@@ -10,6 +10,7 @@
 - https://reactjs.org/docs/add-react-to-a-website.html#quickly-try-jsx
     - Pull in babel as well through type="text/bable" in any html script tag
 - Now have access to ReactDOM variable
+
 **Alternatively**
 - Add react and react-dom dependencies in Scrimba
 - import React from "react"
@@ -87,6 +88,7 @@ function App() {
 }
 // returns Hello Joe Schmoe!
 ```
+
 **Syntax**
 - Can create properties (props) within each component
 ```js
@@ -122,6 +124,7 @@ export default function Component({property1, property2}) {
 <img src={`../images/${props.img}`} className="card--image" />
 ```
 - Above code allows us to insert props element into JSX string
+
 **Mapping Array to JSX elements**
 ```js
 export default function App() {
@@ -145,6 +148,7 @@ export default function App() {
 ```
 - Surround with {} and use straight JS
 - Or can set logic in function before return ()
+
 **Refactoring**
 - Can pass all props in one go
 ```js
@@ -296,6 +300,7 @@ export default function App() {
 }
 ```
 - Cannot use onClick or other event listeners on custom components, instead use handleClick={pass in function in} and then in our component onClick={props.handleClick}
+
 **Passing data to components**
 - Only parents can access state from, but if we raise state into parent, we can pass to children through props
 - Keep state as close to component as possible
@@ -388,6 +393,7 @@ export default function Form() {
 ```
 - We can handle multiple inputs by changing our state to an object
 - Make sure you surround [event.target.name] with square brackets to make it the key
+
 **Controlled Components**
 - Make the state in React the single source of truth:
 - add 'value={formData.firstName}' to the input form to make sure that it is reflecting the React state
