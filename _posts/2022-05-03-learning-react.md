@@ -398,3 +398,87 @@ export default function Form() {
 - Make the state in React the single source of truth:
 - add 'value={formData.firstName}' to the input form to make sure that it is reflecting the React state
 - textarea is not self closing in html, but they have made it so in react
+- better convention
+```js
+function handleChange(event) {
+    const {name, value, type, checked} = event.target
+    setFormData(prevFormData => {
+        return {
+            ...prevFormData,
+            [name]: type === "checkbox" ? checked : value
+        }
+    })
+}
+```
+- radio buttons in react are a combination of checkboxes and text inputs, sets the state to checked radio button
+- need to specify 
+```js
+<fieldset>
+    <legend>Current employment status</legend>
+
+    <input 
+        type="radio"
+        id="unemployed"
+        name="employment"
+        value="unemployed"
+        checked={formData.employement === "unemployed"}
+        onChange={handleChange}
+    />
+    <label htmlFor="unemployed">Unemployed</label>
+    <br />
+
+    <input 
+        type="radio"
+        id="part-time"
+        name="employment"
+        value="part-time"
+        checked={formData.employement === "part-time"}
+        onChange={handleChange}
+    />
+    <label htmlFor="part-time">Part-time</label>
+    <br />
+
+    <input 
+        type="radio"
+        id="full-time"
+        name="employment"
+        value="full-time"
+        checked={formData.employement === "full-time"}
+        onChange={handleChange}
+    />
+    <label htmlFor="full-time">Full-time</label>
+    <br /> 
+
+</fieldset>
+```
+- Select box w/options
+```js
+<select 
+    id="favColor"
+    value={formData.favColor}
+    onChange={handleChange}
+    name="favColor"
+>
+    <option value="">-- Choose --</option>
+    <option value="red">Red</option>
+    <option value="orange">Orange</option>
+    <option value="yellow">Yellow</option>
+    <option value="green">Green</option>
+    <option value="blue">Blue</option>
+    <option value="indigo">Indigo</option>
+    <option value="violet">Violet</option>
+</select>
+```
+**Submitting a form**
+- Button within a form in react acts as a submit button
+- create a submit function
+```js
+function handleSubmit(event) {
+    event.preventDefault()
+    submitToApi(formData)
+}
+```
+- event.preventDefault() to prevent rerendering of page with default values in state
+
+
+## Building an App completely in React
