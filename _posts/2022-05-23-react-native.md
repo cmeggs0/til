@@ -28,6 +28,6 @@
   - Doesn't use pixels, instead uses percentages
 
 ### Expo
-- Quick
+- Quick way to program apps
 **Snacks**
 - 
